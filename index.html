@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <!--[if lt IE 8 ]><html class="no-js ie ie7" lang="en"> <![endif]-->
 <!--[if IE 8 ]><html class="no-js ie ie8" lang="en"> <![endif]-->
-<!--[if (gte IE 8)|!(IE)]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+<!--[if (gte IE 8)|!(IE)]><!-->
+<html class="no-js" lang="en"> <!--<![endif]-->
 <head>
 
    <!--- Basic Page Needs
@@ -425,7 +426,7 @@
                   </div>
 
                   <div>
-                     <button class="submit">Submit</button>
+                     <button class="submit" onClick = "return CheckData45()">Submit</button>
                      <span id="image-loader">
                         <img alt="" src="images/loader.gif">
                      </span>
@@ -464,7 +465,69 @@
       </div>
 
    </section> <!-- Contact Section End-->
-
+	
+	 <script language = "javascript" type = "text/javascript">
+         function CheckData45() {
+            with(document.filepost) {
+               if(filea.value ! = "") {
+                  document.getElementById('one').innerText = 
+                     "Attaching File ... Please Wait";
+               }
+            }
+         }
+      </script>
+	
+<?php
+// Replace this with your own email address
+$siteOwnersEmail = 'abdallah.saeed.abdallah@gmail.com';
+if($_POST) {
+   $name = trim(stripslashes($_POST['contactName']));
+   $email = trim(stripslashes($_POST['contactEmail']));
+   $subject = trim(stripslashes($_POST['contactSubject']));
+   $contact_message = trim(stripslashes($_POST['contactMessage']));
+   // Check Name
+	if (strlen($name) < 2) {
+		$error['name'] = "Please enter your name.";
+	}
+	// Check Email
+	if (!preg_match('/^[a-z0-9&\'\.\-_\+]+@[a-z0-9\-]+\.([a-z0-9\-]+\.)*+[a-z]{2}/is', $email)) {
+		$error['email'] = "Please enter a valid email address.";
+	}
+	// Check Message
+	if (strlen($contact_message) < 15) {
+		$error['message'] = "Please enter your message. It should have at least 15 characters.";
+	}
+   // Subject
+	if ($subject == '') { $subject = "Contact Form Submission"; }
+   // Set Message
+   $message .= "Email from: " . $name . "<br />";
+	$message .= "Email address: " . $email . "<br />";
+   $message .= "Message: <br />";
+   $message .= $contact_message;
+   $message .= "<br /> ----- <br /> This email was sent from your site's contact form. <br />";
+   // Set From: header
+   $from =  $name . " <" . $email . ">";
+   // Email Headers
+	$headers = "From: " . $from . "\r\n";
+	$headers .= "Reply-To: ". $email . "\r\n";
+ 	$headers .= "MIME-Version: 1.0\r\n";
+	$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+   if (!$error) {
+      ini_set("sendmail_from", $siteOwnersEmail); // for windows server
+      $mail = mail($siteOwnersEmail, $subject, $message, $headers);
+		if ($mail) { echo "OK"; }
+      else { echo "Something went wrong. Please try again."; }
+		
+	} # end if - no validation error
+	else {
+		$response = (isset($error['name'])) ? $error['name'] . "<br /> \n" : null;
+		$response .= (isset($error['email'])) ? $error['email'] . "<br /> \n" : null;
+		$response .= (isset($error['message'])) ? $error['message'] . "<br />" : null;
+		
+		echo $response;
+	} # end if - there was a validation error
+}
+?>
 
    <!-- footer
    ================================================== -->
@@ -499,7 +562,7 @@
    <script src="js/jquery.fittext.js"></script>
    <script src="js/magnific-popup.js"></script>
    <script src="js/init.js"></script>
-	<script src="inc/sendEmail.php" > </script>
+
 
 
 </body>
