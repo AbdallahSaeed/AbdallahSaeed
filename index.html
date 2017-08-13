@@ -13,10 +13,7 @@
 	<meta name="author" content="Abdallah Saeed">
 	<meta name="keywords" content="GIS , GIS Developer , Analysis, Programer ">
    
-   <!-- loader
-     ================================================== -->
-   <script src="js/loader.js"></script>
-   <link rel="stylesheet" href="css/loader.css">
+  
    <!-- Mobile Specific Metas
    ================================================== -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -35,10 +32,18 @@
    <!-- Favicons
 	================================================== -->
 	<link rel="shortcut icon" href="favicon.png"  >
-    
+   <!-- loader
+	================================================== --> 
+	<script src="js/loader.js"></script>
+	 <link rel="stylesheet" href="css/loader.css">
 </head>
 
-<body>
+<body onload="myFunction()">
+	
+	
+
+<div id="loader"></div>
+ <div id="myDiv" class="animate-bottom">
  
    <!-- Header
    ================================================== -->
@@ -473,14 +478,11 @@
       <div class="row">
 
          <div class="twelve columns">
-           <!-- <ul class="copyright">
-               <li>&copy; Copyright 2017</li>
-               <li>Design by <a>Abdallah Saeed</a></li> 
-               <li>&copy; Copyright 2017</li>
-               <li>Design by <a>Abdallah Saeed</a></li> 
-               <li>&copy; Copyright 2017</li>
-               <li>Design by <a>Abdallah Saeed</a></li> 
-            </ul>-->
+  <ul class="social-links">
+
+               <li><a href="https://www.linkedin.com/in/abdallah-saeed-gis-developer"><i class="fa fa-linkedin"></i></a></li>
+
+            </ul> 
 
             <ul class="copyright">
                <li>&copy; Copyright 2017</li>
@@ -507,8 +509,7 @@
    <script src="js/magnific-popup.js"></script>
    <script src="js/init.js"></script>
 
-
-
+</div>
 </body>
 
 </html>
